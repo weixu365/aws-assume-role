@@ -1,8 +1,21 @@
 [package]
 name = "aws-assume-role"
-version = "0.1.0"
+description = "Assume aws sts role, save credentials to profile or print to stdout using shell export syntax"
+version = "1.0.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+aws-config = "0.54.1"
+aws-sdk-sts = "0.24.0"
+aws-smithy-http = "0.54.4"
+chrono = "0.4.23"
+clap = {version = "4.1.8", features=["derive"]}
+dirs = "4.0.0"
+rust-ini = "0.18.0"
+thiserror = "1.0.39"
+tokio = { version = "^1.0", features = ["rt-multi-thread", "macros"] }
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.
+opt-level = "z"  # Optimize for size.
+lto = true # remove dead code and often times reduces binary size
