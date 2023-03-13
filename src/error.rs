@@ -5,19 +5,19 @@ use thiserror::Error;
 
 #[derive(Error)]
 pub enum AppError {
-    #[error("Utf8 Error")]
+    #[error("Utf8 Error: {0}")]
     NulError(#[from] std::ffi::NulError),
 
     #[error("Assume role error: {0}")]
     AssumeRoleError(#[from] SdkError<AssumeRoleError>),
 
-    #[error("Ini Error")]
+    #[error("Ini Error: {0}")]
     IniErr(#[from] ini::Error),
 
-    #[error("Std Error")]
+    #[error("io error: {0}")]
     StdErr(#[from] std::io::Error),
 
-    #[error("System Time Error")]
+    #[error("SystemTimeError: {0}")]
     SystemTimeErr(#[from] SystemTimeError),
 }
 
