@@ -1,0 +1,89 @@
+name: Build
+
+on:
+  push:
+    branches:
+    - master
+    - '*'
+  # pull_request:
+  #   branches:
+  #   - master
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+permissions:
+  contents: write
+  deployments: write
+  issues: write
+  packages: write
+  pull-requests: write
+
+jobs:
+  style-check:
+    name: Check Style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - run: make style-check
+
+  Build:
+    name: build
+    strategy:
+      matrix:
+        os: 
+          - host: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            suffix: 
+          - host: windows-latest
+            target: x86_64-pc-windows-gnu
+            suffix: .exe
+          - host: macos-latest
+            target: x86_64-apple-darwin
+            suffix: 
+          - host: macos-latest
+            target: aarch64-apple-darwin
+            suffix: 
+    runs-on: ${{ matrix.os.host }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.os.target }}
+
+      - name: Build
+        run: cargo build --release --target ${{ matrix.os.target }}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: aws-assume-role-${{ matrix.os.target }}${{matrix.os.suffix}}
+          path: target/${{ matrix.os.target }}/release/aws-assume-role${{matrix.os.suffix}}
+          retention-days: 1
+
+  Release:
+    name: Publish packages
+    runs-on: ubuntu-latest
+    needs: build
+    # if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+
+      - name: Display fetched artifacts
+        run: ls -R
+      
+      - run: ./copy-packages.sh
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npx semantic-release
