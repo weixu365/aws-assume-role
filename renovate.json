@@ -1,0 +1,15 @@
+{
+    "extends": [
+      "config:base",
+      "group:all"
+    ],
+    "recreateClosed": true,
+    "packageRules": [
+      {
+        "matchDepTypes": ["devDependencies"],
+        "automerge": true,
+        "automergeType": "pr",
+        "platformAutomerge": true
+      }
+    ]
+  }
