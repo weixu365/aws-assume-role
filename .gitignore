@@ -11,6 +11,7 @@ Cargo.lock
 
 # go semantic release
 .semrel
+node_modules
 
 # go dist folder
 dist

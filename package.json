@@ -1,0 +1,19 @@
+{
+  "name": "aws-assume-role",
+  "version": "1.0.0",
+  "description": "Assume aws role, save to profile or expose to environment variables",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weixu365/aws-assume-role.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weixu365/aws-assume-role/issues"
+  },
+  "homepage": "https://github.com/weixu365/aws-assume-role#readme",
+  "dependencies": {
+    "semantic-release": "^20.1.1"
+  }
+}
