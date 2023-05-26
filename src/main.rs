@@ -60,8 +60,14 @@ async fn main() -> Result<(), AppError> {
                 .set("aws_session_token", &session_token);
 
             credentials_config.write_to_file(&credentials_file)?;
-            println!("AWS CLI profile [{}] credentials updated but not used in ENV", &profile);
-            println!("Use --profile {} in aws cli to use this profile, for example:", &profile);
+            println!(
+                "AWS CLI profile [{}] credentials updated but not used in ENV",
+                &profile
+            );
+            println!(
+                "Use --profile {} in aws cli to use this profile, for example:",
+                &profile
+            );
             println!("aws --profile {} s3 ls", &profile);
         }
 

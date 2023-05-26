@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - if: runner.os == 'Ubuntu'
+      - if: runner.os == 'ubuntu-latest'
         run: apt-get install musl-tools
 
       - name: Install rust
