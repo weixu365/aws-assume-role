@@ -52,7 +52,7 @@ async fn main() -> Result<(), AppError> {
             let credentials_file = home_folder.join(".aws/credentials");
             let mut credentials_config = Ini::load_from_file(&credentials_file)?;
 
-            let mut profile_credentials = credentials_config.with_section(Some(profile));
+            let mut profile_credentials = credentials_config.with_section(Some(&profile));
 
             profile_credentials
                 .set("aws_access_key_id", &access_key_id)
@@ -60,6 +60,15 @@ async fn main() -> Result<(), AppError> {
                 .set("aws_session_token", &session_token);
 
             credentials_config.write_to_file(&credentials_file)?;
+            println!(
+                "AWS CLI profile [{}] credentials updated but not used in ENV",
+                &profile
+            );
+            println!(
+                "Use --profile {} in aws cli to use this profile, for example:",
+                &profile
+            );
+            println!("aws --profile {} s3 ls", &profile);
         }
 
         None => {
