@@ -6,7 +6,7 @@ and save credential to profile or export to env manually
 ## Install
 - ### Download pre-built executables
     ```bash
-    wget https://github.com/weixu365/aws-assume-role/releases/download/v1.0.0/aws-assume-role_darwin_amd64 -O aws-assume-role
+    wget https://github.com/weixu365/aws-assume-role/releases/latest/download/aws-assume-role_darwin_amd64 -O aws-assume-role
     chmod +x aws-assume-role
     # Then copy aws-assume-role to one of your PATH folder, e.g. /usr/local/bin
     ```
