@@ -9,12 +9,12 @@ aws-config = {version="1.5.1", features = ["behavior-version-latest"]}
 aws-sdk-sts = "1.29.0"
 aws-smithy-runtime-api = "1.6.2"
 aws-smithy-http = "0.60.8"
-chrono = "0.4.26"
-clap = {version = "4.3.10", features=["derive"]}
+chrono = "0.4.38"
+clap = {version = "4.5.4", features=["derive"]}
 dirs = "5.0.1"
 rust-ini = "0.21.0"
-thiserror = "1.0.40"
-tokio = { version = "^1.29.1", features = ["rt-multi-thread", "macros"] }
+thiserror = "1.0.61"
+tokio = { version = "^1.38.0", features = ["rt-multi-thread", "macros"] }
 
 [profile.release]
 strip = true  # Automatically strip symbols from the binary.
