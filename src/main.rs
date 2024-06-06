@@ -25,7 +25,7 @@ struct Args {
     #[arg(short, long, default_value_t = 3600)]
     duration: i32,
 
-    /// Auto refresh the token when saving credentials to profile
+    /// Auto refresh the sts token
     #[arg(short, long, default_value_t = false)]
     refresh: bool,
 }
