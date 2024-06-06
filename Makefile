@@ -17,3 +17,6 @@ publish:
 
 install: release
 	cp target/release/aws-assume-role ~/.cargo/bin/aws-assume-role
+
+upgrade:
+	cargo upgrade
