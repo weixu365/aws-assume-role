@@ -1,3 +1,4 @@
+.PHONY: debug release
 
 format:
 	cargo fmt --all
@@ -13,3 +14,6 @@ release:
 
 publish:
 	npx semantic-release
+
+install: release
+	cp target/release/aws-assume-role ~/.cargo/bin/aws-assume-role
