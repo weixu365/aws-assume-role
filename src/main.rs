@@ -80,7 +80,6 @@ async fn main() -> Result<(), AppError> {
             tokio::time::sleep(tokio::time::Duration::from_secs(refresh_interval as u64)).await;
         }
     } else {
-        println!("Auto refresh is disabled");
         assume_role(args).await?;
     }
 
