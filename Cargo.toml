@@ -5,13 +5,13 @@ version = "1.0.0"
 edition = "2021"
 
 [dependencies]
-aws-config = "0.54.1"
-aws-sdk-sts = "0.24.0"
-aws-smithy-http = "0.54.4"
+aws-config = "1.0.0"
+aws-sdk-sts = "1.0.0"
+aws-smithy-http = "0.60.0"
 chrono = "0.4.24"
 clap = {version = "4.1.8", features=["derive"]}
-dirs = "4.0.0"
-rust-ini = "0.18.0"
+dirs = "5.0.0"
+rust-ini = "0.21.0"
 thiserror = "1.0.39"
 tokio = { version = "^1.26", features = ["rt-multi-thread", "macros"] }
 
