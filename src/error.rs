@@ -1,5 +1,5 @@
-use aws_sdk_sts::error::AssumeRoleError;
-use aws_smithy_http::result::SdkError;
+use aws_sdk_sts::operation::assume_role::AssumeRoleError;
+use aws_smithy_runtime_api::{client::result::SdkError, http::Response};
 use std::{fmt, time::SystemTimeError};
 use thiserror::Error;
 
@@ -9,7 +9,7 @@ pub enum AppError {
     NulError(#[from] std::ffi::NulError),
 
     #[error("Assume role error: {0}")]
-    AssumeRoleError(#[from] SdkError<AssumeRoleError>),
+    AssumeRoleError(#[from] SdkError<AssumeRoleError, Response>),
 
     #[error("Ini Error: {0}")]
     IniErr(#[from] ini::Error),
