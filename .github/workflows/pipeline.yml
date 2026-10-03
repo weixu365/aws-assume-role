@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install rust
         uses: dtolnay/rust-toolchain@stable
@@ -51,7 +51,7 @@ jobs:
     runs-on: ${{ matrix.os.host }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - if: matrix.os.host == 'ubuntu-latest'
         run: sudo apt-get install musl-tools
 
@@ -63,7 +63,7 @@ jobs:
       - name: Build
         run: cargo build --release --target ${{ matrix.os.target }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: aws-assume-role-${{ matrix.os.target }}${{matrix.os.suffix}}
           path: target/${{ matrix.os.target }}/release/aws-assume-role${{matrix.os.suffix}}
@@ -76,8 +76,8 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+        uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
 
       - name: Display fetched artifacts
         run: ls -R
@@ -85,8 +85,8 @@ jobs:
       - run: ./copy-packages.sh
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
       - run: npm ci
       - run: npx semantic-release
